@@ -29,9 +29,10 @@ public class LapsBackendApplication {
     		
     							) {
         return args -> {
-        	User u1_emp = userRepo.save(new User("Emp1", "emp1pw", USER_TYPE.EMPLOYEE));
-        	User u2_man = userRepo.save(new User("Man1", "man1pw", USER_TYPE.MANAGER));
-        	User u3_adm = userRepo.save(new User("Adm1", "adm1pw", USER_TYPE.ADMIN));
+        	User u_emp1 = userRepo.save(new User("Emp1", "emp1pw", USER_TYPE.EMPLOYEE));
+        	User u_man1 = userRepo.save(new User("Man1", "man1pw", USER_TYPE.MANAGER));
+        	User u_adm1 = userRepo.save(new User("Adm1", "adm1pw", USER_TYPE.ADMIN));
+        	User u_adm2 = userRepo.save(new User("Adm2", "adm1pw", USER_TYPE.ADMIN));
         	/*
         	User u1 = new User("John", "johnpw", USER_TYPE.ADMIN);
         	Employee e1 = new Employee();
