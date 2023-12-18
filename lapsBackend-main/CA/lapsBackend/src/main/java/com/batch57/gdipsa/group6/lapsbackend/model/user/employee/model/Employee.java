@@ -99,6 +99,7 @@ public class Employee extends User {
         this.calenderYearMedicalLeave = calenderYearMedicalLeave;
     }
     
+    /*
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
@@ -108,6 +109,6 @@ public class Employee extends User {
     public void setUser(User user) {
         this.user = user;
     }
-
+	*/
 
 }

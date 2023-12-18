@@ -29,8 +29,10 @@ public class LapsBackendApplication {
     		
     							) {
         return args -> {
-        	User u0 = userRepo.save(new User("UserOnly", "userpw", USER_TYPE.ADMIN));
-       
+        	User u1_emp = userRepo.save(new User("Emp1", "emp1pw", USER_TYPE.EMPLOYEE));
+        	User u2_man = userRepo.save(new User("Man1", "man1pw", USER_TYPE.MANAGER));
+        	User u3_adm = userRepo.save(new User("Adm1", "adm1pw", USER_TYPE.ADMIN));
+        	/*
         	User u1 = new User("John", "johnpw", USER_TYPE.ADMIN);
         	Employee e1 = new Employee();
         	e1.setEntitlementToAnnualLeave(true);
@@ -42,7 +44,7 @@ public class LapsBackendApplication {
         	e1.setUserType(u1.getUserType());
         	emplRepo.save(e1);
         	
-			
+			/*
 		    Department d1 = new Department();
         	d1.setName("Finance");
         	d1.setLedByManager(e1);
@@ -50,8 +52,8 @@ public class LapsBackendApplication {
         	
         	e1.setBelongToDepartment(d1);
         	emplRepo.save(e1);
-        	
-        	
+        	*/
+        	/*
         	User u2 = new User("Jenny", "jennypw", USER_TYPE.EMPLOYEE);
         	Employee e2 = new Employee();
         	e2.setEntitlementToAnnualLeave(true);
@@ -63,6 +65,7 @@ public class LapsBackendApplication {
         	e2.setUserType(u2.getUserType());
         	emplRepo.save(e2);
         	
+        	/*
 		    Department d2 = new Department();
         	d2.setName("Finance");
         	d2.setLedByManager(e2);
@@ -70,7 +73,7 @@ public class LapsBackendApplication {
         	
         	e2.setBelongToDepartment(d2);
         	emplRepo.save(e2);
-        	
+        	*/
         };
     }
 

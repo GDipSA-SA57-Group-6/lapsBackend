@@ -49,19 +49,23 @@ public class AdminController {
             USER_TYPE[] types = USER_TYPE.values();
 
             User newUser = new User(inUser.getName(), inUser.getPassword(), types[user_type]);
-
+            userService.CreateUser(newUser);
+            /*LF Remove
             Employee emp = new Employee(inUser.getName(), inUser.getPassword(), types[user_type]);
             if(types[user_type] == USER_TYPE.EMPLOYEE) {
                 EmployeeService.CreateEmployee(emp);
+                
             }else {
                 userService.CreateUser(newUser);
             }
-
+			*/
             return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
+    
+   
 
     @GetMapping("/list")
     public ResponseEntity<List<User>> GetAllUser() {
@@ -72,7 +76,8 @@ public class AdminController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
+    
+    /*
     @GetMapping("/delete/{id}")
     public ResponseEntity<User> DeleteById(@PathVariable("id") Integer id) {
         userService.DeleteUserById(id);
@@ -83,7 +88,19 @@ public class AdminController {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
+    */
+    //LF Update
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<HttpStatus> DeleteById(@PathVariable("id") Integer id) {
+	    try {
+	      userService.DeleteUserById(id);
+	      return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+	    } catch (Exception e) {
+	      return new ResponseEntity<HttpStatus>(HttpStatus.EXPECTATION_FAILED);
+	    }
+	  }
 
+    
     @PutMapping("/update/{id}/{user_type}")
     public ResponseEntity<User> ModifyUserRoleById(@PathVariable("id") int id, @PathVariable("user_type") int user_type) {
         USER_TYPE[] types = USER_TYPE.values();

@@ -79,10 +79,10 @@ public class User {
         this.user_id = user_id;
     }
     
+    /*
     //LF:
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     //inverse side, does not own the foreign key column
     private Employee employee;
-
-    	
+    */
 }
