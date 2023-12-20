@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.batch57.gdipsa.group6.lapsbackend.model.holiday.PublicHoliday;
-import com.batch57.gdipsa.group6.lapsbackend.serviceLayer.holiday.holidayInterfaceImpl;
+import com.batch57.gdipsa.group6.lapsbackend.serviceLayer.holiday.publicHolidayInterfaceImplementation;
 //... 其他导入 ...
 
 @RestController
@@ -22,7 +22,7 @@ import com.batch57.gdipsa.group6.lapsbackend.serviceLayer.holiday.holidayInterfa
 public class HolidayController {
 	
 	 @Autowired
-	 private holidayInterfaceImpl holidayService;
+	 private publicHolidayInterfaceImplementation holidayService;
 	
 	 // GET 所有公共假期
 	 @GetMapping
@@ -45,25 +45,25 @@ public class HolidayController {
 	     return ResponseEntity.ok(createdHoliday);
 	 }
 	
-	 // PUT 更新现有公共假期
-	 @PutMapping("/{id}")
-	 public ResponseEntity<PublicHoliday> updatePublicHoliday(@PathVariable int id, @RequestBody PublicHoliday holidayDetails) {
-	     PublicHoliday existingHoliday = holidayService.getPublicHolidayById(id);
-	     if (existingHoliday != null) {
-	         existingHoliday.setDate(holidayDetails.getDate());
-	         existingHoliday.setName(holidayDetails.getName());
-	         existingHoliday = holidayService.addPublicHoliday(existingHoliday); // 确保更新后的对象被返回
-	     } else {
-	         return ResponseEntity.notFound().build(); // 如果找不到假期，则返回404 Not Found
-	     }
-	     return ResponseEntity.ok(existingHoliday);
-	 }
+//	 // PUT 更新现有公共假期
+//	 @PutMapping("/{id}")
+//	 public ResponseEntity<PublicHoliday> updatePublicHoliday(@PathVariable int id, @RequestBody PublicHoliday holidayDetails) {
+//	     PublicHoliday existingHoliday = holidayService.getPublicHolidayById(id);
+//	     if (existingHoliday != null) {
+//	         existingHoliday.setDate(holidayDetails.getDate());
+//	         existingHoliday.setName(holidayDetails.getName());
+//	         existingHoliday = holidayService.addPublicHoliday(existingHoliday); // 确保更新后的对象被返回
+//	     } else {
+//	         return ResponseEntity.notFound().build(); // 如果找不到假期，则返回404 Not Found
+//	     }
+//	     return ResponseEntity.ok(existingHoliday);
+//	 }
 	
 	
 	 // DELETE 删除公共假期
 	 @DeleteMapping("/{id}")
 	 public ResponseEntity<Void> deletePublicHoliday(@PathVariable int id) {
-	     holidayService.deletePublicHoliday(id);
+	     holidayService.deletePublicHolidayById(id);
 	     return ResponseEntity.ok().build();
 	 }
 }

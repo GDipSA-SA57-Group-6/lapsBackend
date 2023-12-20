@@ -9,8 +9,16 @@ public interface publicHolidayInterface {
     List<PublicHoliday> getAllPublicHolidays();
     PublicHoliday getPublicHolidayById(int id);
     PublicHoliday addPublicHoliday(PublicHoliday holiday);
-    void deletePublicHoliday(int id);
-    boolean isPublicHoliday(LocalDate date);
+    void deletePublicHolidayById(int id);
     boolean isWeekend(LocalDate date);
     int countHolidaysAndWeekends(LocalDate startDate, LocalDate endDate);
+    boolean isPublicHoliday(LocalDate date);
+
+    /**
+     * 新增方法
+     */
+    void InitPublicHolidayOfYear(int year);
+    void DeleteAll();
+    PublicHoliday GetHolidayByDate(LocalDate date);
+    PublicHoliday AddingPublicHolidayToDatabase(LocalDate date, String name);
 }

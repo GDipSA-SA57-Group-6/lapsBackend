@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "PublicHoliday")
+@Table(name = "PublicHoliday", uniqueConstraints = @UniqueConstraint(columnNames = "date"))
 @Inheritance(strategy = InheritanceType.JOINED) // 使用 JOINED 继承策略
 public class PublicHoliday {
 	@JsonProperty("holiday_id")
@@ -30,12 +30,13 @@ public class PublicHoliday {
     // Constructors
     public PublicHoliday() {
         // This is needed for Hibernate
+        this.isWeekend = false;
     }
 
-    public PublicHoliday(LocalDate date, String name, Boolean isWeekend) {
+    public PublicHoliday(LocalDate date, String name) {
         this.date = date;
         this.name = name;
-        this.isWeekend = isWeekend;
+        this.isWeekend = false;
     }
 
     // Getters and Setters
@@ -63,19 +64,21 @@ public class PublicHoliday {
         this.name = name;
     }
 
-    public Boolean getIsWeekend() {
-    	DayOfWeek day = date.getDayOfWeek();
-        return day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY;
-    }
-
     // toString method for debugging
     @Override
     public String toString() {
         return "Holiday{" +
                 "id=" + id +
                 ", date=" + date +
-                ", name='" + name + '\'' +
-                ", isWeekend=" + isWeekend +
+                ", name='" + name +
                 '}';
+    }
+
+    public Boolean getWeekend() {
+        return isWeekend;
+    }
+
+    public void setWeekend(Boolean weekend) {
+        isWeekend = weekend;
     }
 }
