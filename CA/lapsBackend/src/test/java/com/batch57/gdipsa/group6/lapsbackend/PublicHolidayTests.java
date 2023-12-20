@@ -20,10 +20,10 @@ public class PublicHolidayTests {
     /**
      * 测试初始化数据库
      */
-    @Test
-    public void InitPublicHolidayDatabase() {
-        publicHolidayService.InitPublicHolidayOfYear(2023);
-    }
+//    @Test
+//    public void InitPublicHolidayDatabase() {
+//        publicHolidayService.InitPublicHolidayOfYear(2023);
+//    }
 
     /**
      * 测试返回所有非周末的假期

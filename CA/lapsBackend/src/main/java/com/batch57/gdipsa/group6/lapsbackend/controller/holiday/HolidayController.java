@@ -3,6 +3,7 @@ package com.batch57.gdipsa.group6.lapsbackend.controller.holiday;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,4 +67,14 @@ public class HolidayController {
 	     holidayService.deletePublicHolidayById(id);
 	     return ResponseEntity.ok().build();
 	 }
+
+
+	/**
+	 * 新增模块
+	 */
+	@GetMapping("/initialize/{year}")
+	public ResponseEntity<?> InitializePublicHoliday(@PathVariable("year") int year) {
+		holidayService.InitPublicHolidayOfYear(year);
+		return new ResponseEntity<>("Successfully initialized", HttpStatus.OK);
+	}
 }

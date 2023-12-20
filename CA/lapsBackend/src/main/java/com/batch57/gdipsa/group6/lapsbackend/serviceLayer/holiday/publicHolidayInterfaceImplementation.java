@@ -7,8 +7,10 @@ import com.batch57.gdipsa.group6.lapsbackend.repository.holiday.publicHolidayRep
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import jakarta.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,5 +150,18 @@ public class publicHolidayInterfaceImplementation implements publicHolidayInterf
         }
 
         return publicHolidayRepo.save(holiday);
+    }
+
+    @Override
+    public Set<LocalDate> GetPublicHolidaySet() {
+        List<PublicHoliday> publicHolidays = getAllPublicHolidays();
+        Set<LocalDate> publicHolidaySet = new HashSet<>();
+
+        publicHolidays
+                .forEach(p -> {
+                    publicHolidaySet.add(p.getDate());
+                });
+
+        return publicHolidaySet;
     }
 }

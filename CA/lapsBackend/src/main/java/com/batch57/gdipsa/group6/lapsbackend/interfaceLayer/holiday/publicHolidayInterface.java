@@ -2,6 +2,7 @@ package com.batch57.gdipsa.group6.lapsbackend.interfaceLayer.holiday;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import com.batch57.gdipsa.group6.lapsbackend.model.holiday.PublicHoliday;
 
@@ -21,4 +22,5 @@ public interface publicHolidayInterface {
     void DeleteAll();
     PublicHoliday GetHolidayByDate(LocalDate date);
     PublicHoliday AddingPublicHolidayToDatabase(LocalDate date, String name);
+    Set<LocalDate> GetPublicHolidaySet();
 }
