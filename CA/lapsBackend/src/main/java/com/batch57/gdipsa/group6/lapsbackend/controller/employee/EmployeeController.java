@@ -176,8 +176,6 @@ public class EmployeeController {
         return new ResponseEntity<>(departmentService.GetEmployeesAndSubManagerByDepartmentId(department_id), HttpStatus.OK);
     }
 
-    
-
 //    @GetMapping("/update-application-status-by-id")
 //    public ResponseEntity<?> UpdateApplicationStatusById(@RequestHeader("user_id") int user_id, @RequestHeader("application_id") int application_id, @RequestHeader("status") APPLICATION_STATUS status, @RequestBody Application newApplication) {
 //        Application application = applicationService.GetApplicationById(application_id);
