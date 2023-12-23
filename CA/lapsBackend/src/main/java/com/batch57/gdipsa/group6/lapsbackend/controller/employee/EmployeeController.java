@@ -166,6 +166,7 @@ public class EmployeeController {
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping("get-subordinates-by-id/{user_id}")
     public ResponseEntity<?> GetSubordinatesById(@PathVariable("user_id") int id ){
         int department_id = employeeService.isManager(id);

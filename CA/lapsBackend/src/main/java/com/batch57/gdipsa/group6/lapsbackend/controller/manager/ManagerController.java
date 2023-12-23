@@ -100,6 +100,7 @@ public class ManagerController {
      * 并且在RequestHeader里面有{manager_id} {application_id} 和 {status}, 其中application_status要遵循enum格式,
      * 表示manager_id的用户 要修改application_id的申请状态为status
      */
+    @CrossOrigin
     @GetMapping("/update-application-status")
     public ResponseEntity<?> UpdateApplicationStatus(@RequestHeader("manager_id") int manager_id, @RequestHeader("application_id") int application_id ,@RequestHeader("status") APPLICATION_STATUS status, @RequestHeader("reviewedComment") String reviewedComment) {
         // 获取发起请求的对象

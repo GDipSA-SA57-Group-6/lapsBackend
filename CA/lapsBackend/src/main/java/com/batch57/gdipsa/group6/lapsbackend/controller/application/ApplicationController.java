@@ -183,6 +183,7 @@ public class ApplicationController {
      * application编号
      * @return
      */
+    @CrossOrigin
     @GetMapping("/get/{application_id}")
     public ResponseEntity<Application> GetApplicationById(@PathVariable("application_id") int application_id) {
         Application application = applicationService.GetApplicationById(application_id);
@@ -222,6 +223,7 @@ public class ApplicationController {
      * @param user_id
      * @return
      */
+    @CrossOrigin
     @GetMapping("/get-application-by-employee-id/{user_id}")
     public ResponseEntity<List<Application>> GetApplicationByEmployeeId(@PathVariable("user_id") int user_id) {
         List<Application> applications = applicationService.GetApplicationByEmployeeId(user_id);
@@ -254,6 +256,7 @@ public class ApplicationController {
      * @param department_id
      * @return
      */
+    @CrossOrigin
     @GetMapping("/get-application-by-department-id/{department_id}")
     public ResponseEntity<List<Application>> GetApplicationByDepartmentId(@PathVariable("department_id") int department_id) {
         List<Application> applications = applicationService.GetApplicationByDepartmentId(department_id);
@@ -300,6 +303,7 @@ public class ApplicationController {
         return ResponseEntity.ok(!isApplicable);
     }
 
+    @CrossOrigin
     @GetMapping("/get-subordinates-alive-application")
     public ResponseEntity<?> GetSubordinatesAliveApplication(@RequestHeader("user_id") int user_id) {
         return new ResponseEntity<>(GetAliveApplicationLedBy(user_id), HttpStatus.OK);
