@@ -78,6 +78,7 @@ export default function ListApplication() {
                                 <th>Leave Type</th>
                                 <th>From Date</th>
                                 <th>Day Off</th>
+                                <th>Estimated To Date</th>
                                 <th>Application Status</th>
                                 <th>&nbsp;</th>
                             </tr>

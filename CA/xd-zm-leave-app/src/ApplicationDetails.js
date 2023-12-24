@@ -187,6 +187,7 @@ export default function ApplicationDetails() {
             <div>Leave Type: {pendingApplication?.employeeLeaveType}</div>
             <div>From Date: {pendingApplication?.fromDate}</div>
             <div>Day Off: {pendingApplication?.dayOff}</div>
+            <div>Estimated To Date: {pendingApplication?.estimatedToDate}</div>
             <div>Applying Reason: {pendingApplication?.applyingReason}</div>
             <div>Application Status: {pendingApplication?.applicationStatus}</div>
             {showApproveRejectButton ?

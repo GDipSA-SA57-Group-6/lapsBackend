@@ -23,6 +23,7 @@ export default function Application({pendingApplication}){
             <td>{pendingApplication.employeeLeaveType}</td>
             <td>{pendingApplication.fromDate}</td>
             <td>{pendingApplication.dayOff}</td>
+            <td>{pendingApplication.estimatedToDate}</td>
             <td>{pendingApplication.applicationStatus}</td>
             <td>
             <a href={"/application-details?id=" + pendingApplication.application_id}

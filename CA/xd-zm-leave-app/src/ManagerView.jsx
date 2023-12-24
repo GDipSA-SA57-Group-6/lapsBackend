@@ -51,7 +51,7 @@ const ManagerView = () => {
                     <ul>
                         {applications.map(application => (
                             <li key={application.id}>
-                                Type: {application.employeeLeaveType} - Status: {application.applicationStatus} - from : {application.fromDate} - duration : {application.dayOff} - compensation start: {application.compensationStartPoint}
+                                Type: {application.employeeLeaveType} - Status: {application.applicationStatus} - from : {application.fromDate} - duration : {application.dayOff} - estimated to : {application.estimatedToDate} - compensation start: {application.compensationStartPoint}
                             </li>
                         ))}
                     </ul>
