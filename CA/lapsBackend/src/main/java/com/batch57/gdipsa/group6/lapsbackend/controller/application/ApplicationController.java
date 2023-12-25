@@ -8,6 +8,7 @@ import com.batch57.gdipsa.group6.lapsbackend.serviceLayer.application.Applicatio
 import com.batch57.gdipsa.group6.lapsbackend.serviceLayer.application.CompensationLeaveValidator;
 import com.batch57.gdipsa.group6.lapsbackend.serviceLayer.department.DepartmentInterfaceImplementation;
 import com.batch57.gdipsa.group6.lapsbackend.serviceLayer.user.employeeInterfaceImpl;
+import com.batch57.gdipsa.group6.lapsbackend.serviceLayer.email.emailSendingImplementation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,6 +53,8 @@ public class ApplicationController {
     private ApplicationInterfaceImplementation applicationService;
     @Autowired
     private DepartmentInterfaceImplementation departmentService;
+    @Autowired
+    emailSendingImplementation emailService;
 
     // compensation检查器
     /**
@@ -173,6 +176,12 @@ public class ApplicationController {
         if(created == null) {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }else {
+        	// 找到其主管的email并发送
+            emailService.sendSimpleMessage(
+            	employee.getBelongToDepartment().getLedByManager().getEmail(),
+                "Notification of Employee's Request for Leave of Absence",
+                "Employee " + employee.getName() + " has sent a request for leave of absence. Please log in to the system to see the details."
+            );
             return new ResponseEntity<>(created, HttpStatus.OK);
         }
     }

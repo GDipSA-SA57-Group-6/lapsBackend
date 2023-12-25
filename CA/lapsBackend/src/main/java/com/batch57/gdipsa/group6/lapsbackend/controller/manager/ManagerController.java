@@ -8,6 +8,7 @@ import com.batch57.gdipsa.group6.lapsbackend.model.holiday.HolidayPoint;
 import com.batch57.gdipsa.group6.lapsbackend.model.user.employee.model.Employee;
 import com.batch57.gdipsa.group6.lapsbackend.serviceLayer.application.ApplicationInterfaceImplementation;
 import com.batch57.gdipsa.group6.lapsbackend.serviceLayer.department.DepartmentInterfaceImplementation;
+import com.batch57.gdipsa.group6.lapsbackend.serviceLayer.email.emailSendingImplementation;
 import com.batch57.gdipsa.group6.lapsbackend.serviceLayer.holiday.employeeScheduleInterfaceImplementation;
 import com.batch57.gdipsa.group6.lapsbackend.serviceLayer.user.employeeInterfaceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,8 @@ public class ManagerController {
     employeeInterfaceImpl employeeService;
     @Autowired
     employeeScheduleInterfaceImplementation employeeScheduleService;
-
+    @Autowired
+    emailSendingImplementation emailService;
     /**
      * 验证发过来的用户id是否为一个department的manager
      * 为了方便，不采用动态的验证，因为涉及到session。
@@ -173,6 +175,11 @@ public class ManagerController {
         // 如果状态已经为Cancelled了，那就不能继续其他操作了
         APPLICATION_STATUS curStatus = application.getApplicationStatus();
         if(curStatus == APPLICATION_STATUS.CANCELLED) {
+            emailService.sendSimpleMessage(
+                application.getEmployee().getEmail(),
+                "Notification of results of leave applications",
+                "Sorry, Your vacation request has been REJECTED. The reason is: " + reviewedComment + ". Please log in to the system to see the details."
+            );
             return new ResponseEntity<>("This application has already been cancelled and can't be moved forward", HttpStatus.EXPECTATION_FAILED);
         }
 
@@ -225,6 +232,12 @@ public class ManagerController {
                 employeeScheduleService.CreateSchedule(schedule); // 保存到假期安排的数据库中
 
                 application.setSchedule(schedule); // 把该application关联到这个schedule中
+                
+                emailService.sendSimpleMessage(
+                    application.getEmployee().getEmail(),
+                    "Notification of results of leave applications",
+                    "Congratulations, your vacation request has been APPROVED. Please log in to the system to see the details."
+                );
             }
 
             // 保存
