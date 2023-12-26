@@ -233,8 +233,13 @@ public class ManagerController {
                 application.setSchedule(schedule); // 把该application关联到这个schedule中
             }
             
-            emailService.sendVacationResultEmail(employee.getEmail(), employee.getName(), reviewedComment ,status);
-         
+            try {
+                emailService.sendVacationResultEmail(employee.getEmail(), employee.getName(), reviewedComment, status);
+            } catch (Exception e) {
+                // 记录日志或进行其他错误处理
+                System.out.println("邮件发送失败: " + e.getMessage());
+                // 可以选择是否要返回特定的响应或继续执行
+            }
             // 保存
             employeeService.UpdateEmployee(employee);
             return new ResponseEntity<>(applicationService.UpdateApplication(application), HttpStatus.OK);

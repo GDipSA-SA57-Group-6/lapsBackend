@@ -179,11 +179,17 @@ public class ApplicationController {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }else {
         	// 找到其主管的email并发送
-            emailService.sendLeaveRequestNotificationEmail(
-            	employee.getBelongToDepartment().getLedByManager().getEmail(),
-            	employee.getBelongToDepartment().getLedByManager().getName(),
-                employee.getName()
-            );
+            try {
+                emailService.sendLeaveRequestNotificationEmail(
+                    employee.getBelongToDepartment().getLedByManager().getEmail(),
+                    employee.getBelongToDepartment().getLedByManager().getName(),
+                    employee.getName()
+                );
+            } catch (Exception e) {
+                // 记录日志或进行其他错误处理
+                System.out.println("邮件发送失败: " + e.getMessage());
+                // 可以选择是否要返回特定的响应或继续执行
+            }
             return new ResponseEntity<>(created, HttpStatus.OK);
         }
     }
