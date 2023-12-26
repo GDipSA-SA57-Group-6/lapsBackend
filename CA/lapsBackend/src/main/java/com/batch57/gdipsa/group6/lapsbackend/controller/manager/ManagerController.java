@@ -179,11 +179,6 @@ public class ManagerController {
         // 如果状态已经为Cancelled了，那就不能继续其他操作了
         APPLICATION_STATUS curStatus = application.getApplicationStatus();
         if(curStatus == APPLICATION_STATUS.CANCELLED) {
-            emailService.sendSimpleMessage(
-                application.getEmployee().getEmail(),
-                "Notification of results of leave applications",
-                "Sorry, Your vacation request has been REJECTED. The reason is: " + reviewedComment + ". Please log in to the system to see the details."
-            );
             return new ResponseEntity<>("This application has already been cancelled and can't be moved forward", HttpStatus.EXPECTATION_FAILED);
         }
 
@@ -236,14 +231,10 @@ public class ManagerController {
                 employeeScheduleService.CreateSchedule(schedule); // 保存到假期安排的数据库中
 
                 application.setSchedule(schedule); // 把该application关联到这个schedule中
-                
-                emailService.sendSimpleMessage(
-                    application.getEmployee().getEmail(),
-                    "Notification of results of leave applications",
-                    "Congratulations, your vacation request has been APPROVED. Please log in to the system to see the details."
-                );
             }
-
+            
+            emailService.sendVacationResultEmail(employee.getEmail(), employee.getName(), reviewedComment ,status);
+         
             // 保存
             employeeService.UpdateEmployee(employee);
             return new ResponseEntity<>(applicationService.UpdateApplication(application), HttpStatus.OK);

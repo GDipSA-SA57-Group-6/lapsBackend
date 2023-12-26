@@ -179,10 +179,10 @@ public class ApplicationController {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }else {
         	// 找到其主管的email并发送
-            emailService.sendSimpleMessage(
+            emailService.sendLeaveRequestNotificationEmail(
             	employee.getBelongToDepartment().getLedByManager().getEmail(),
-                "Notification of Employee's Request for Leave of Absence",
-                "Employee " + employee.getName() + " has sent a request for leave of absence. Please log in to the system to see the details."
+            	employee.getBelongToDepartment().getLedByManager().getName(),
+                employee.getName()
             );
             return new ResponseEntity<>(created, HttpStatus.OK);
         }
